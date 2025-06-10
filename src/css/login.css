@@ -1,0 +1,151 @@
+/* Login page style */
+body {
+    background-color: #0d0d0d;
+    font-family: 'Orbitron', sans-serif;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 2rem;
+    height: 100vh;
+    position: relative;
+}
+
+/* Wrapper for the login form */
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5vh; 
+}
+
+/* Heading */
+.login-wrapper h2 {
+    text-align: center;
+    color: #0ff;
+    margin-bottom: 1.5rem;
+}
+
+/* Top right corner sign-up button */
+.signup-link {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 500px;
+    background: #111;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #0ff;
+    border: 1px solid #0ff;
+}
+
+/* Input fields */
+input[type="text"],
+input[type="password"] {
+    padding: 0.75rem;
+    background: #1a1a1a;
+    border: 1px solid #0ff;
+    color: #0ff;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+}
+
+/* Input focus effect */
+input[type="text"]:focus,
+input[type="password"]:focus {
+    box-shadow: 0 0 8px #0ff;
+}
+
+/* Button styling */
+button[type="button"],
+button[type="submit"] {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* Sign-up button styling */
+button[type="button"] {
+    background: #222;
+    border: 1px solid #0ff;
+    color: #0ff;
+    width: fit-content;
+}
+
+/* Button hover effect */
+button[type="button"]:hover {
+    background: #0ff;
+    color: #000;
+}
+
+/* Submit button styling */
+button[type="submit"] {
+    background: linear-gradient(90deg, #00f6ff, #0ff, #00f6ff);
+    background-size: 200% 100%;
+    color: #000;
+    border: none;
+    animation: glow-border 2s linear infinite;
+}
+
+/* Submit button hover effect */
+button[type="submit"]:hover {
+    background-position: right center;
+}
+
+/* Message styling */
+p {
+    text-align: center;
+    margin-top: 1rem;
+    color: #f55;
+}
+
+/* Border glow animation */
+@keyframes glow-border {
+    0% {
+        box-shadow: 0 0 5px #0ff;
+    }
+    50% {
+        box-shadow: 0 0 20px #0ff;
+    }
+    100% {
+        box-shadow: 0 0 5px #0ff;
+    }
+}
+
+/* Container holding the form and the return button */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Return button styling */ 
+.return-button {
+    margin-top: 1rem;
+    background:#111;
+    border: 1px solid #0ff;
+    color: #0ff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* Return button hover effect */
+.return-button:hover {
+    background-color: #0ff;
+    color: #000;    
+}

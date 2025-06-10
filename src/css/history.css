@@ -1,0 +1,70 @@
+/* View history page style */
+body {
+    background-color: #0d0d0d;
+    font-family: 'Orbitron', sans-serif;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 2rem;
+    height: 100vh;
+}
+
+/* History container style */
+.history-container {
+    max-width: 800px;
+    margin: auto;
+    background: #111;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #0ff;
+    border: 1px solid #0ff;
+}
+
+/* Heading style */
+h2 {
+    color: #0ff;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Summary text block style */
+.summary-text {
+    background: #1a1a1a;
+    padding: 1rem;
+    border-left: 4px solid #0ff;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Loading and error messages */
+.loading,
+.error {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #0ff;
+    margin-top: 2rem;
+}
+
+/* Summary row */
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.summary-text {
+    flex: 1;
+    margin: 0;
+}
+
+/* Like button style */
+.like-button {
+    margin-top: 10px;
+    background-color: transparent;
+    border: none;
+    color: #d00;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+

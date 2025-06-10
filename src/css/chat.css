@@ -1,0 +1,169 @@
+/* Chat page style*/
+body {
+    background-color: #0d0d0d;
+    font-family: 'Orbitron', sans-serif;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 2rem;
+    height: 100vh;
+}
+
+/* Form container style */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 600px;
+    margin: auto;
+    background: #111;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #0ff;
+    border: 1px solid #0ff;
+}
+
+/* Input style */ 
+input[type="text"] {
+    padding: 0.75rem;
+    background: #1a1a1a;
+    border: 1px solid #0ff;
+    color: #0ff;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+}
+
+/* Input focus effect */
+input[type="text"]:focus {
+    box-shadow: 0 0 8px #0ff;
+}
+
+/* Button styling */
+button {
+    padding: 0.75rem;
+    background: linear-gradient(90deg, #00f6ff, #0ff, #00f6ff);
+    background-size: 200% 100%;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: glow-border 2s linear infinite;
+}
+
+/* Button hover animation */
+button:hover {
+    background-position: right center;
+}
+
+/* Button glow animation */
+@keyframes glow-border {
+    0% {
+        box-shadow: 0 0 5px #0ff;
+    }
+    50% {
+        box-shadow: 0 0 20px #0ff;
+    }
+    100% {
+        box-shadow: 0 0 5px #0ff;
+    }
+}
+
+/* Chat History container style */ 
+.chat-history {
+    max-height: 50vh;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    padding-right: 1rem;
+}
+
+/* Individual chat message style */
+.chat-entry {
+    margin-bottom: 1.5rem;
+    background: #1a1a1a;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 3px solid #0ff;
+}
+
+/* Spacing for submitted input and response */
+.submitted-input {
+    margin-bottom: 1rem;
+}
+
+/* Adds space above AI message */
+.ai-response {
+    margin-top: 1rem;  
+}
+
+/* Highlight strong text in messages */
+.submitted-input strong,
+.ai-response strong {
+    color: #0ff;
+}
+
+/* Form Wrapper positioning */
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: all 0.6s ease-in-out;
+    position: relative;
+}
+
+/* Reposition form to bottom of the screen */
+.form-wrapper.bottom {
+    align-items: flex-end;
+    padding-bottom: 2rem;
+}
+
+/* Responsive form design */
+form {
+    width: 100%;
+    max-width: 600px;
+    background: #111;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #0ff;
+    border: 1px solid #0ff;
+    transition: all 0.6s ease-in-out;
+}
+
+/* Sign-up button and Logout button */
+.sign-up-button, .logout-button {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+}
+
+/* Logout button special styling */
+.logout-button button {
+    padding: 0.75rem;
+    background: linear-gradient(90deg, #ff0000, #ff4d4d, #ff0000);
+    background-size: 200% 100%;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: glow-red-border 2s linear infinite;
+}
+
+.logout-button button:hover {
+    background-position: right center;
+}
+
+/* Red glow effext for logout button */
+@keyframes glow-red-border {
+    0% {
+        box-shadow: 0 0 5px #ff4d4d;
+    }
+    50% {
+        box-shadow: 0 0 20px #ff4d4d;
+    }
+    100% {
+        box-shadow: 0 0 5px #ff4d4d;
+    }
+}
