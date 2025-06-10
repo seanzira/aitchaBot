@@ -22,11 +22,11 @@ To set up the application on your local machine, follow these steps:
 1. **Download the Project Files**: 
    Clone the repository or download it as a ZIP file. If you’re using Git, run:
    ```bash
-   git clone https://github.com/username/managingCredentials.git
+   git clone https://github.com/username/aitchaBot.git
 2. **Navigate to the Project Directory**
    Tpe: 
    ```bash
-   cd managingCredentials
+   cd aitchaBot
 3. **Set up the environment variables**
    Create a .env file in the root of the project's directory to configure your        environment settings. This might include adding:
    ```bash
