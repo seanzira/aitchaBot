@@ -13,6 +13,7 @@ const Chat = () => {
     const [ loading, setLoading ] = useState(false);
     const [ data, setData ] = useState([]);
     const [ spellErrors, setSpellErrors ] = useState({});
+    const [ excelContent, setExcelContent ] = useState(null);
 
     const [ chatHistory, setChatHistory ] = useState(() => {
         const savedHistory = localStorage.getItem(`chatHistory_${username}`);
@@ -58,26 +59,22 @@ const Chat = () => {
         reader.readAsBinaryString(e.target.files[0]);
 
         reader.onload = async (e) => {
-            const data = e.target.result;
-            const workbook = XLSX.read(data, { type: "binary" });
+            const binaryData = e.target.result;
+            const workbook = XLSX.read(binaryData, { type: "binary" });
             const sheetName = workbook.SheetNames[0];
             const sheet = workbook.Sheets[sheetName];
             const parsedData = XLSX.utils.sheet_to_json(sheet);
-            setData(parsedData);
 
-            // Running spell check on every string cell in the uploaded data
-            for (let rowIndex = 0; rowIndex < parsedData.length; rowIndex++) {
-                const row = parsedData[rowIndex];
-                const values = Object.values(row);
+            // Save raw Excel data temporarily
+            setExcelContent(parsedData);
 
-                for (let cellIndex = 0; cellIndex < values.length; cellIndex++) {
-                    const value = values[cellIndex];
+            // Convert to string and set as user input
+            const flattenedText = parsedData.map(row => 
+                Object.values(row).join(' ')
+            ).join('\n');
 
-                    if (typeof value === 'string') {
-                        await checkSpelling(value, rowIndex, cellIndex);
-                    }
-                }
-            }
+            // Triggers the submit button
+            setUserInput(flattenedText);
         }
     }
 
@@ -107,10 +104,29 @@ const Chat = () => {
             const newEntry = { user: userInput, ai: aiResponse};
             const updatedHistory = [...chatHistory, newEntry]
 
-            // Storing the conversation and clearing the input element after
-            // the user has pressed submit
-            setChatHistory(updatedHistory);
-            localStorage.setItem(`chatHistory_${username}`, JSON.stringify(updatedHistory));
+            if (excelContent) {
+                setData(excelContent);
+
+                for (let rowIndex = 0; rowIndex < excelContent.length; rowIndex++) {
+                    const row = excelContent[rowIndex];
+                    const values = Object.values(row);
+
+                    for (let cellIndex = 0; cellIndex < values.length; cellIndex++) {
+                        const value = values[cellIndex];
+
+                        if (typeof value === 'string') {
+                            await checkSpelling(value, rowIndex, cellIndex);
+                        }
+                    }
+                }
+
+                updatedHistory.push({ type: 'excel', data: excelContent});
+                localStorage.setItem(`chatHistory_${username}`, JSON.stringify(updatedHistory));
+
+                // Reset excelContent after use 
+                setExcelContent(null);
+            }
+
             setUserInput('');
         } catch (error) {
             // Error handling and debugging alert to monitor the storage of information
@@ -129,100 +145,94 @@ const Chat = () => {
     }
 
     return (
-        // Adding sign up and login functionality, so that the user can have a more personalised
-        // experience with the chatgpt 
         <div className={`form-wrapper ${chatHistory.length > 0 ? 'bottom' : ''}`}>
-    <form onSubmit={handleStorage}>
-        <div className='chat-history'>
-            {/* Chat History Entries */}
-            {chatHistory.map((entry, index) => (
-                <div key={index} className='chat-entry'>
-                    <div className='submitted-input'>
-                        <strong>{username}</strong> {entry.user}
-                    </div>
-                    <div className='ai-response'>
-                        <strong>AI:</strong> {entry.ai}
-                    </div>
+            <form onSubmit={handleStorage}>
+                <div className='chat-history'>
+                    {chatHistory.map((entry, index) => {
+                        if (entry.type === 'excel') {
+                            return (
+                                <div key={index} className='chat-entry excel-data'>
+                                    <strong>Uploaded Excel File</strong>
+                                    <table className='table'>
+                                        <thead>
+                                            <tr>
+                                                {Object.keys(entry.data[0]).map((key) => (
+                                                    <th key={key}>{key}</th>
+                                                ))}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {entry.data.map((row, rowIndex) => (
+                                                <tr key={rowIndex}>
+                                                    {Object.values(row).map((value, cellIndex) => (
+                                                        <td key={cellIndex}>
+                                                            {typeof value === 'string'
+                                                                ? highlightMissSpellings(value, rowIndex, cellIndex)
+                                                                : value}
+                                                        </td>
+                                                    ))}
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            );
+                        }
+
+                        return (
+                            <div key={index} className='chat-entry'>
+                                <div className='submitted-input'>
+                                    <strong>{username}</strong> {entry.user}
+                                </div>
+                                <div className='ai-response'>
+                                    <strong>AI:</strong> {entry.ai}
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
-            ))}
 
-            {/* Uploaded Excel File Display */}
-            {data.length > 0 && (
-                <div className='chat-entry excel-data'>
-                    <strong>Uploaded Excel File</strong>
-                    <table className='table'>
-                        <thead>
-                            <tr>
-                                {Object.keys(data[0]).map((key) => (
-                                    <th key={key}>{key}</th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {data.map((row, rowIndex) => (
-                                <tr key={rowIndex}>
-                                    {Object.values(row).map((value, cellIndex) => (
-                                        <td key={cellIndex}>
-                                            {typeof value === 'string'
-                                                ? highlightMissSpellings(value, rowIndex, cellIndex)
-                                                : value}
-                                        </td>
-                                    ))}
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            )}
+                {loading && (
+                    <div className='loading'>
+                        <p>Responding...</p>
+                    </div>
+                )}
+
+                <input
+                    type='text'
+                    placeholder='What do you need help with?'
+                    value={userInput}
+                    onChange={(e) => setUserInput(e.target.value)}
+                    required
+                />
+
+                {userInput.trim() !== '' && (
+                    <button type='submit'>Submit</button>
+                )}
+
+                <Link to='/history'>
+                    <button type='button'>VIEW HISTORY</button>
+                </Link>
+
+                <input
+                    type='file'
+                    accept='.xlsx, .xls'
+                    onChange={handleFileUpload}
+                />
+
+                {!isLoggedIn ? (
+                    <div className='sign-up-button'>
+                        <Link to='/login'>
+                            <button type='button'>SIGN UP/LOGIN</button>
+                        </Link>
+                    </div>
+                ) : (
+                    <div className='logout-button'>
+                        <button type='button' onClick={handleLogout}>LOGOUT</button>
+                    </div>
+                )}
+            </form>
         </div>
-
-        {/* Loading Indicator */}
-        {loading && (
-            <div className='loading'>
-                <p>Responding...</p>
-            </div>
-        )}
-
-        {/* Input Field */}
-        <input
-            type='text'
-            placeholder='What do you need help with?'
-            value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
-            required
-        />
-
-        {/* Submit Button */}
-        {userInput.trim() !== '' && (
-            <button type='submit'>Submit</button>
-        )}
-
-        {/* View History Button */}
-        <Link to='/history'>
-            <button type='button'>VIEW HISTORY</button>
-        </Link>
-
-        {/* Excel File Upload */}
-        <input
-            type='file'
-            accept='.xlsx, .xls'
-            onChange={handleFileUpload}
-        />
-
-        {/* Login / Signup Button & Logout Button */}
-        {!isLoggedIn ? (
-            <div className='sign-up-button'>
-            <Link to='/login'>
-                <button type='button'>SIGN UP/LOGIN</button>
-            </Link>
-        </div>
-        ) : (
-            <div className='logout-button'>
-                <button type='button' onClick={handleLogout}>LOGOUT</button>
-            </div>
-        )}
-    </form>
-</div>
     );
 };
 
