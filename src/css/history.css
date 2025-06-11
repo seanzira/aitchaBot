@@ -68,3 +68,29 @@ h2 {
     cursor: pointer;
 }
 
+/* Make history buttons stack vertically without spacing */
+.history-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+/* Return button styling */ 
+.return-button {
+    background-color: #0ff;
+    color: #000;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Return button hover effect */
+.return-button:hover {
+    background-color: #00cccc;
+}
