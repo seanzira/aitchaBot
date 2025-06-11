@@ -14,13 +14,20 @@ AitchaBot is a customizable ChatGPT model and personality, designed to function 
 This project addresses the need for a customizable ChatGPT interface that can be used by any company for any personalised needs that can be added. 
 
 ## Features
-**User Registration and Login** : Securely register and authenticate users.
-**View History** : Tracking your search history in the event that you need to revisit pages that you came across, with the timestamps.
-**Like and Unlike functionality on the View History** : Better method of keeping track of what you regard important or interesting to come back to
-**Delete history functionality** : To clear your search history if the information is unimportant.
-**Excel File Upload Functionality** : Allows the user to upload Excel files which are then checked for spelling errors, and are displayed underlined in red.
+- **User Input section** : The user can enter any question they need assistance with
+- **User Registration and Login** : Securely register and authenticate users, and changes the username on the user's input from 'You' to their username.
+- **View History** : Tracking your search history in the event that you need to revisit pages that you came across, with the timestamps.
+- **Like and Unlike functionality on the View History** : Better method of keeping track of what you regard important or interesting to come back to
+- **Delete history functionality** : To clear your search history if the information is unimportant.
+- **Excel File Upload Functionality** : Allows the user to upload Excel files which are then checked for spelling errors, and are displayed underlined in red.
 
 ## Usage 
+Upon launching the application, users are presented with the main AitchaBot interface, which allows them to:
+
+- 1: SignUp/ login
+- 2: Enter anything they need help with
+- 3: View History
+- 4: Choose a file to upload
 
 ## Installation
 To set up the application on your local machine, follow these steps:
