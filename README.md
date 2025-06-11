@@ -18,13 +18,13 @@ This project addresses the need for a customizable ChatGPT interface that can be
 - **User Registration and Login** : Secure authentication with personalized usernames shown in chat.
 - **View History** : See previous chats with timestamps.
 - **Like and Unlike functionality on the View History** : Mark important summaries for easy reference.
-- **Delete history functionality** : Clear chat and history anytime
+- **Delete history functionality** : Clear chat and history anytime.
 - **Excel File Upload Functionality** : Upload Excel files, check spelling in string fields, and highlight errors inline.
 
 ## Usage 
 Upon launching the application, users are presented with the main AitchaBot interface, which allows them to:
 
-- 1: Sign up or login in
+- 1: Sign up or login.
 - 2: Enter any question or request.
 - 3: View and interact with previous conversations.
 - 4: Upload an Excel file for review.
