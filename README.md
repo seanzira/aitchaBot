@@ -15,7 +15,7 @@ This project addresses the need for a customizable ChatGPT interface that can be
 
 ## Features
 - **User Input section** : Ask any question, and receive friendly, helpful responses.
-- **User Registration and Login** : Secure authentication with personalized usernames shown in chat
+- **User Registration and Login** : Secure authentication with personalized usernames shown in chat.
 - **View History** : See previous chats with timestamps.
 - **Like and Unlike functionality on the View History** : Mark important summaries for easy reference.
 - **Delete history functionality** : Clear chat and history anytime
