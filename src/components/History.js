@@ -146,9 +146,7 @@ const History = () => {
                 <Link to='/'>
                 <button className='return-button'>Return</button>
                 </Link>
-                <Link>
-                <button className='clear-button' onClick={clearHistory}>Clear History & Summaries</button>
-                </Link>
+                <button className='return-button clear-button' onClick={clearHistory}>Clear History & Summaries</button>
             </div>
         </div>
     );
