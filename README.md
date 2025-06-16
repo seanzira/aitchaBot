@@ -1,6 +1,6 @@
 # Aitcha-Bot
 
-AitchaBot is a customizable ChatGPT interface designed to feel less like a typical AI and more like chatting with a familiar friend. It offers personalized features like user registration, conversation history, file uploads, and more -- ideal for companies or individuals seeking a tailored AI assistant experience 
+AitchaBot is a customizable ChatGPT interface designed to feel less like a typical AI and more like chatting with a familiar friend. It offers personalized features like user registration, conversation history, file uploads, and more -- ideal for companies or individuals seeking a tailored AI assistant experience. 
 
 # Table of contents
 - [Project Details](#project-details)
@@ -11,7 +11,7 @@ AitchaBot is a customizable ChatGPT interface designed to feel less like a typic
 - [Contact](#contact)
 
 ## Project Details
-This project addresses the need for a customizable ChatGPT interface that can be used by any company for any personalised needs that can be added. 
+AitchaBot solves the need for a flexible, brandable AI assistant. It can be tailored to suit any business's specific requirements, offering an intuitive, human-like interaction model powered by ChatGPT.
 
 ## Features
 - **User Input section** : Ask any question, and receive friendly, helpful responses.
